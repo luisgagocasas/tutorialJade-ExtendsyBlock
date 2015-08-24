@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8">
+		<title>Jade </title>
+		<link rel="stylesheet" href="prism.css" />
+		<style>
+		pre > code.highlight {
+			outline: .4em solid red;
+		}
+		</style>
+	</head>
+	<body>
+
+<h1>CÓMO USAR EXTENDS Y BLOCK EN JADE</h1>
+
+<p>
+	Ya aprendimos como <a href="http://escueladigital.pe/blog/desarrollo/como-usar-include-en-jade">Importar en <strong>Jade</strong></a> ahora iremos un paso más allá.
+</p>
+<h2>Extends</h2>
+<p>
+	Se basa en la idea de tener un archivo base y este ser reusado en todas nuestras vistas.
+</p>
+<h2>Block</h2>
+<p>
+	Define un bloque de código para que luego pueda ser cambiado.
+</p>
+<p>A continuación un ejemplo.</p>
+<p>Este será nuestro archivo <strong>base.jade</strong> (Normal)</p>
+<pre class="line-numbers"><code class="language-jade">
+!!! 5
+html(lang="es")
+	head
+		meta(charset="UTF-8")
+		title Hola Mundo
+	body
+		.wrapper
+			.header Header
+		  article.main
+		    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, est.
+		  aside.aside.aside-1 Aside 1
+		  aside.aside.aside-2 Aside 2
+		  footer.footer Footer
+</code></pre>
+
+<p>1) Ahora definiremos el código con <code>Block</code> | <strong>base.jade</strong> (Modificado)</p>
+<pre class="line-numbers"><code class="language-jade">
+!!! 5
+html(lang="es")
+	head
+		meta(charset="UTF-8")</code>
+<code class="highlight language-jade">
+		block titulo
+			title Hola Mundo</code>
+<code class="language-jade">
+	body
+		.wrapper</code>
+<code class="highlight language-jade">
+			block cabecera
+				.header Header</code>
+<code class="language-jade">
+		  article.main
+		    p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, est.
+		  aside.aside.aside-1 Aside 1
+		  aside.aside.aside-2 Aside 2
+		  footer.footer Footer
+</code></pre>
+
+<p>2) Una vez definidos los <code>block</code> procedemos a usar el <code>extends</code> en un archivo nuevo | <strong>index.jade</strong></p>
+<pre class="line-numbers"><code class="language-jade">
+extends base.jade
+block titulo
+	title Escuela Digital
+</code></pre>
+<p>
+	En el punto "2" el archivo <strong>index.jade</strong> hacemos el llamado al archivo <strong>base.jade</strong> con toda su estructura pero solo cambiará el <code>block titulo</code>.
+</p>
+<p>
+	En el caso del <code>block cabecera</code> se imprimirá tal cual por que en el archivo <strong>index.jade</strong> no se produjo ningún cambio a este.
+</p>
+3) Y así se mostrará el html <strong>index.html</strong>
+<pre class="language-markup line-numbers"><code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="es"&gt;
+  &lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Escuela Digital&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  	&lt;div class="wrapper"&gt;
+	  &lt;header class="header"&gt;Header&lt;/header&gt;
+	  &lt;article class="main"&gt;
+	    &lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, est.&lt;/p&gt;
+	  &lt;/article&gt;
+	  &lt;aside class="aside aside-1"&gt;Aside 1&lt;/aside&gt;
+	  &lt;aside class="aside aside-2"&gt;Aside 2&lt;/aside&gt;
+	  &lt;footer class="footer"&gt;Footer&lt;/footer&gt;
+	&lt;/div&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+<h2>Recomendación</h2>
+<ul>
+	<li>Tener mucho cuidado con la indentación por que <strong>Jade</strong> es muy sensible en ello.</li>
+	<li>La definición con <code>block</code> es posible hacerla con muchos niveles de jerarquía.</li>
+	<li>Así como vimos en el punto 2. Pueden crear sus propias vistas para los archivos que ustedes quieran como (hola.jade, blog.jade, contacto.jade, etc.) </li>
+</ul>
+
+<p>Espero haber sido de gran ayuda no duden en dejar sus comentarios para poder responder a sus preguntas.</p>
+		<script src="prism.js"></script>
+	</body>
+</html>
